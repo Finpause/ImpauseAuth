@@ -20,7 +20,7 @@ app.use(passport.initialize());
 passportConfig(passport);
 
 // Routes
-app.use('/api/auth', authRoutes);
+app.use('', authRoutes);
 
 // Error handler middleware
 app.use(errorHandler);
