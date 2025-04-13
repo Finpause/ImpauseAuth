@@ -18,10 +18,10 @@ echo ""
 
 # 1. Test register endpoint
 echo -e "${BLUE}1. Registering a new user${NC}"
+# Register with first and last name
 REGISTER_RESPONSE=$(curl -s -X POST "$BASE_URL/register" \
   -H "Content-Type: application/json" \
-  -d "{\"email\":\"$EMAIL\",\"password\":\"$PASSWORD\"}")
-
+  -d "{\"firstName\":\"John\",\"lastName\":\"Doe\",\"email\":\"$EMAIL\",\"password\":\"$PASSWORD\"}")
 echo "Response: $REGISTER_RESPONSE"
 echo ""
 

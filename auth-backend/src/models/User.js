@@ -2,6 +2,16 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const UserSchema = new mongoose.Schema({
+  firstName: {
+    type: String,
+    required: [true, 'Please provide your first name'],
+    trim: true
+  },
+  lastName: {
+    type: String,
+    required: [true, 'Please provide your last name'],
+    trim: true
+  },
   email: {
     type: String,
     required: [true, 'Please provide an email'],
@@ -53,5 +63,10 @@ UserSchema.pre('save', async function(next) {
 UserSchema.methods.comparePassword = async function(candidatePassword) {
   return await bcrypt.compare(candidatePassword, this.password);
 };
+
+// Virtual for full name
+UserSchema.virtual('fullName').get(function() {
+  return `${this.firstName} ${this.lastName}`;
+});
 
 module.exports = mongoose.model('User', UserSchema);

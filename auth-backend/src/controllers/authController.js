@@ -5,35 +5,40 @@ const { createError } = require('../utils/errorHandler');
 class AuthController {
     async registerUser(req, res, next) {
         try {
-            const { email, password } = req.body;
-
+            const { firstName, lastName, email, password } = req.body;
+    
             // Check if user already exists
             const existingUser = await User.findOne({ email });
             if (existingUser) {
                 return next(createError(400, 'Email already in use'));
             }
-
+    
             // Create new user
             const user = new User({
+                firstName,
+                lastName,
                 email,
                 password
             });
-
+    
             await user.save();
-
+    
             // Generate JWT token
             const token = jwt.sign(
                 { id: user._id, email: user.email, role: user.role },
                 process.env.JWT_SECRET,
                 { expiresIn: process.env.JWT_EXPIRES_IN }
             );
-
+    
             // Return success response without password
             res.status(201).json({
                 success: true,
                 token,
                 user: {
                     id: user._id,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    fullName: user.firstName + ' ' + user.lastName,
                     email: user.email,
                     role: user.role,
                     isVerified: user.isVerified
@@ -82,7 +87,6 @@ class AuthController {
             next(error);
         }
     }
-
     async getUser(req, res, next) {
         try {
             // User ID is available from auth middleware in req.user
@@ -91,11 +95,14 @@ class AuthController {
             if (!user) {
                 return next(createError(404, 'User not found'));
             }
-
+    
             res.status(200).json({
                 success: true,
                 user: {
                     id: user._id,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    fullName: user.firstName + ' ' + user.lastName,
                     email: user.email,
                     role: user.role,
                     isVerified: user.isVerified,

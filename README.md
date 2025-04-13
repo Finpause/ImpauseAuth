@@ -73,6 +73,8 @@ This project is a full authentication backend built with Node.js, Express, Mongo
 - **POST /register**: Register a new user
   ```json
   {
+    "firstName": "John",
+    "lastName": "Doe",
     "email": "user@example.com",
     "password": "password123"
   }
