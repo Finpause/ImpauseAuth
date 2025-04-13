@@ -70,7 +70,7 @@ This project is a full authentication backend built with Node.js, Express, Mongo
 ### API Endpoints
 
 #### Authentication
-- **POST /api/auth/register**: Register a new user
+- **POST /register**: Register a new user
   ```json
   {
     "email": "user@example.com",
@@ -78,7 +78,7 @@ This project is a full authentication backend built with Node.js, Express, Mongo
   }
   ```
 
-- **POST /api/auth/login**: Log in an existing user
+- **POST /login**: Log in an existing user
   ```json
   {
     "email": "user@example.com",
@@ -86,9 +86,9 @@ This project is a full authentication backend built with Node.js, Express, Mongo
   }
   ```
 
-- **GET /api/auth/me**: Get authenticated user profile (requires auth token)
+- **GET /me**: Get authenticated user profile (requires auth token)
 
-- **POST /api/auth/update-password**: Update user password (requires auth token)
+- **POST /update-password**: Update user password (requires auth token)
   ```json
   {
     "currentPassword": "oldPassword",
@@ -96,7 +96,7 @@ This project is a full authentication backend built with Node.js, Express, Mongo
   }
   ```
 
-- **POST /api/auth/logout**: Log out user (requires auth token)
+- **POST /logout**: Log out user (requires auth token)
 
 ### Testing the API
 
