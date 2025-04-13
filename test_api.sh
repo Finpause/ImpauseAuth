@@ -2,7 +2,7 @@
 # filepath: /Users/Ethan_1/Python/ImpauseAuth/auth-backend/test-api.sh
 
 # Set the base URL
-BASE_URL="http://localhost:5000/api/auth"
+BASE_URL="http://localhost:5050/api/auth"
 EMAIL="test@example.com"
 PASSWORD="password123"
 
